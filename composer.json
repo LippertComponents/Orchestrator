@@ -1,0 +1,43 @@
+{
+  "name": "lci/orchestrator",
+  "description": "Allow MODX to have composer managed packages running Blend Migrations and using lci/console for cli commands.",
+  "license": "MIT",
+  "keywords": [
+    "modx", "cli"
+  ],
+  "authors": [
+    {
+      "name": "Joshua Gulledge",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "LCI\\MODX\\Orchestrator\\": "src/"
+    }
+  },
+  "require": {
+    "php" : ">=7.0.0",
+    "lci/blend": "^1.0.0",
+    "lci/console": "^1.0.1"
+  },
+  "scripts": {
+    "post-package-install": [
+      "LCI\\MODX\\Orchestrator\\ComposerHelper::install"
+    ],
+    "post-package-update": [
+      "LCI\\MODX\\Orchestrator\\ComposerHelper::update"
+    ],
+    "post-package-uninstall": [
+      "LCI\\MODX\\Orchestrator\\ComposerHelper::uninstall"
+    ]
+  },
+  "bin": [
+    "bin/orchestrator"
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^6"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
