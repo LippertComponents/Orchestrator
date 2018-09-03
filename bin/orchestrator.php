@@ -28,6 +28,8 @@ if (version_compare(phpversion(),'5.3.0') >= 0) {
 }
 
 $console = new Console();
+$console->registerPackageCommands('LCI\MODX\Orchestrator\Console\ActivePackageCommands');
+
 /** @var Application $application */
 $application = new Application($console);
 $application->loadCommands();
