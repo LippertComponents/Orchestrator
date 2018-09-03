@@ -10,7 +10,7 @@ namespace LCI\MODX\Orchestrator;
 
 use LCI\Blend\Blender;
 use LCI\MODX\Console\Console;
-use LCI\MODX\Orchestrator\Console\Helpers\VoidUserInteractionHandler;
+use LCI\MODX\Console\Helpers\VoidUserInteractionHandler;
 
 class Orchestrator
 {

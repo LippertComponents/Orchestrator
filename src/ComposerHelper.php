@@ -15,9 +15,9 @@ use Composer\Installer\PackageEvent;
 class ComposerHelper
 {
     /**
-     * @param PackageEvent $event
+     * @param Event $event
      */
-    public static function install(PackageEvent $event)
+    public static function install(Event $event)
     {
         $args = $event->getArguments();
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
@@ -27,9 +27,9 @@ class ComposerHelper
     }
 
     /**
-     * @param PackageEvent $event
+     * @param Event $event
      */
-    public static function update(PackageEvent $event)
+    public static function update(Event $event)
     {
         $args = $event->getArguments();
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');

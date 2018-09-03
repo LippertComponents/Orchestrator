@@ -22,10 +22,10 @@
     "lci/console": "^1.0.1"
   },
   "scripts": {
-    "post-package-install": [
+    "post-install-cmd": [
       "LCI\\MODX\\Orchestrator\\ComposerHelper::install"
     ],
-    "post-package-update": [
+    "post-update-cmd": [
       "LCI\\MODX\\Orchestrator\\ComposerHelper::update"
     ],
     "post-package-uninstall": [
