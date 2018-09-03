@@ -19,6 +19,6 @@ If you have not install composer do so now before proceeding
 2. ```mkdir orchestrator```
 3. Then cd into the directory
 4. Run ```composer install lci/orchestrator```
-5. Then run command to install ```php vender/bin/orchestrator orchestrator:install```
+5. Then run command to install ```php vendor/bin/orchestrator orchestrator:install```
 
 @TODO properly run scripts on install & update

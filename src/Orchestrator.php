@@ -143,6 +143,12 @@ class Orchestrator
      */
     protected static function getPackagePath($package='lci/orchestrator')
     {
+        if (empty(static::$modx)) {
+            /** @var \LCI\MODX\Console\Console $console */
+            $console = new Console();
+            static::$modx = $console->loadMODX();
+        }
+
         $path = static::$modx->getOption(
             'orchestrator.vendor_path',
             null,
