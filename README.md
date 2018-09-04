@@ -18,7 +18,32 @@ If you have not install composer do so now before proceeding
 1. Go to MODX/core/components
 2. ```mkdir orchestrator```
 3. Then cd into the directory
-4. Run ```composer install lci/orchestrator```
+4. Create a composer.json file and put in the contents as mentioned below. This is temporary until released on Packagist.org.
+4. Run ```composer install lci/orchestrator``` or ```composer require```
 5. Then run command to install ```php vendor/bin/orchestrator orchestrator:install```
+6. May also need to do: ```php vendor/bin/blend``` this will register the blend commands within orchestrator
 
-@TODO properly run scripts on install & update
+## composer.json 
+
+```json
+{
+
+  "require": {
+       "lci/orchestrator": "dev-master"
+   },
+  "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/LippertComponents/Orchestrator"
+        }
+    ],
+
+  "minimum-stability": "dev"
+}
+```
+
+## @TODO 
+
+ - [ ] Properly run composer.json scripts on install & update
+ - [ ] Tests
+ 
