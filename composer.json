@@ -19,7 +19,7 @@
   "require": {
     "php" : ">=7.0.0",
     "lci/blend": "^1.0.0",
-    "lci/console": "^1.0.1"
+    "lci/console": "^1.0.3"
   },
   "scripts": {
     "post-install-cmd": [
