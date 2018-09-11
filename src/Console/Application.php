@@ -16,5 +16,5 @@ class Application extends \LCI\MODX\Console\Application
 
     protected static $name = 'Orchestrator Console';
 
-    protected static $version = '1.0.0 alpha';
+    protected static $version = '1.0.0 beta';
 }
