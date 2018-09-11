@@ -11,6 +11,11 @@ class InstallOrchestrator extends Migrations
      */
     public function up()
     {
+        // Allow Custom .ENV
+        $custom_base_path = getenv('LCI_ORCHESTRATOR_BASE_PATH');
+        $custom_base_url = getenv('LCI_ORCHESTRATOR_BASE_URL');
+        $custom_vendor_path = getenv('LCI_ORCHESTRATOR_VENDOR_PATH');
+
         // 1. MODX namespace
         $orchestratorNamespace = $this->modx->getObject('modNamespace', 'orchestrator');
 
@@ -18,7 +23,7 @@ class InstallOrchestrator extends Migrations
             /** @var \modNamespace $orchestratorNamespace */
             $orchestratorNamespace = $this->modx->newObject('modNamespace');
             $orchestratorNamespace->set('name', 'orchestrator');
-            $orchestratorNamespace->set('path', '{core_path}orchestrator/');
+            $orchestratorNamespace->set('path', '{core_path}vendor/');
             $orchestratorNamespace->set('assets_path', '{assets_path}orchestrator/');
 
             if ($orchestratorNamespace->save()) {
@@ -32,8 +37,8 @@ class InstallOrchestrator extends Migrations
         $orchestratorMediaSource = $this->blender->getBlendableMediaSource('orchestrator');
         $saved = $orchestratorMediaSource
             ->setFieldDescription('Orchestrator packages')
-            ->setPropertyBasePath('core/components/orchestrator/vendor/')
-            ->setPropertyBaseUrl('core/components/orchestrator/vendor/')
+            ->setPropertyBasePath(!$custom_base_path ? 'core/vendor/' : $custom_base_path)
+            ->setPropertyBaseUrl(!$custom_base_url ? 'core/vendor/' : $custom_base_url)
             ->blend();
 
         if ($saved) {
@@ -47,7 +52,7 @@ class InstallOrchestrator extends Migrations
         $systemSetting = $this->blender->getBlendableSystemSetting('orchestrator.vendor_path');
         $saved = $systemSetting
             ->setSeedsDir($this->getSeedsDir())
-            ->setFieldValue(MODX_CORE_PATH.'components/orchestrator/vendor/')
+            ->setFieldValue(!$custom_vendor_path ? MODX_CORE_PATH.'vendor/' : $custom_vendor_path)
             ->setFieldArea('Composer')
             ->setFieldNamespace('orchestrator')
             ->blend();
