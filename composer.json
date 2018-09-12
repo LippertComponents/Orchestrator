@@ -19,7 +19,13 @@
   "require": {
     "php" : ">=7.0.0",
     "lci/blend": "^1.0.0",
-    "lci/console": "^1.0.3"
+    "lci/console": "^1.0.3",
+    "composer-plugin-api": "^1.1"
+  },
+  "extra": {
+    "auto-install": [
+      "lci/blend"
+    ]
   },
   "scripts": {
     "post-install-cmd": [

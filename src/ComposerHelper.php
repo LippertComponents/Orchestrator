@@ -9,8 +9,10 @@
 
 namespace LCI\MODX\Orchestrator;
 
+use Composer\Composer;
 use Composer\Script\Event;
 use Composer\Installer\PackageEvent;
+use Composer\Package\Package;
 
 class ComposerHelper
 {
@@ -20,10 +22,24 @@ class ComposerHelper
     public static function install(Event $event)
     {
         $args = $event->getArguments();
-        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+
+        /** @var Composer $composer */
+        $composer = $event->getComposer();
+
+        $vendorDir = $composer->getConfig()->get('vendor-dir');
         require $vendorDir . '/autoload.php';
 
         Orchestrator::install();
+
+        /** @var Package $package */
+        $package = $composer->getPackage();
+        $extra = $package->getExtra();
+
+        if (isset($extra['auto-install']) && is_array($extra['auto-install'])) {
+            foreach ($extra['auto-install'] as $orchestrator_package) {
+                Orchestrator::installComposerPackage($orchestrator_package);
+            }
+        }
     }
 
     /**
@@ -32,10 +48,22 @@ class ComposerHelper
     public static function update(Event $event)
     {
         $args = $event->getArguments();
-        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+        /** @var Composer $composer */
+        $composer = $event->getComposer();
+        $vendorDir = $composer->getConfig()->get('vendor-dir');
         require $vendorDir . '/autoload.php';
 
         Orchestrator::install();
+
+        /** @var Package $package */
+        $package = $composer->getPackage();
+        $extra = $package->getExtra();
+
+        if (isset($extra['auto-install']) && is_array($extra['auto-install'])) {
+            foreach ($extra['auto-install'] as $orchestrator_package) {
+                Orchestrator::updateComposerPackage($orchestrator_package);
+            }
+        }
     }
 
     /**
@@ -44,9 +72,21 @@ class ComposerHelper
     public static function uninstall(PackageEvent $event)
     {
         $args = $event->getArguments();
-        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+        /** @var Composer $composer */
+        $composer = $event->getComposer();
+        $vendorDir = $composer->getConfig()->get('vendor-dir');
         require $vendorDir . '/autoload.php';
 
-        Orchestrator::install();
+        Orchestrator::uninstall();
+
+        /** @var Package $package */
+        $package = $composer->getPackage();
+        $extra = $package->getExtra();
+
+        if (isset($extra['auto-install']) && is_array($extra['auto-install'])) {
+            foreach ($extra['auto-install'] as $orchestrator_package) {
+                Orchestrator::uninstallComposerPackage($orchestrator_package);
+            }
+        }
     }
 }
