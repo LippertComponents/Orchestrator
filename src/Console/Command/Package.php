@@ -15,6 +15,7 @@ class Package extends BaseCommand
     {
         $this
             ->setName('orchestrator:install')
+            ->setAliases(['orch:install'])
             ->setDescription('Install/Update orchestrator');
     }
 
