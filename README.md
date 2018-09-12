@@ -29,11 +29,14 @@ LCI_ORCHESTRATOR_BASE_PATH="core/components/orchestrator/vendor/"
 LCI_ORCHESTRATOR_BASE_URL="core/components/orchestrator/vendor/"
 LCI_ORCHESTRATOR_VENDOR_PATH="MODX_CORE_PATH/components/orchestrator/vendor/" 
 ```
+**Automatic install steps**
 
-**Required steps**
+For automatic install see the [LocalOrchestrator Example](https://github.com/LippertComponents/LocalOrchestrator) 
 
-4. Optionally create a composer.json file, see below for example
-5. Run ```composer install lci/orchestrator``` or ```composer require```
+**Manual steps**
+
+4. Optionally create a composer.json file, see below for example. 
+5. Run ```composer install lci/orchestrator``` or ```composer require lci/orchestrator```
 6. Then run command to install ```php vendor/bin/orchestrator orchestrator:install```
 7. May also need to do: ```php vendor/bin/blend``` this will register the blend commands within orchestrator
 
