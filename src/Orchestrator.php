@@ -152,7 +152,7 @@ class Orchestrator
         $path = static::$modx->getOption(
             'orchestrator.vendor_path',
             null,
-            (defined('MODX_CORE_PATH') ? MODX_CORE_PATH.'components/orchestrator/vendor/' : dirname(__DIR__))
+            (defined('MODX_CORE_PATH') ? MODX_CORE_PATH.'vendor/' : dirname(__DIR__))
         );
         $path .= $package . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
 
