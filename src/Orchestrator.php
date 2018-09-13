@@ -9,11 +9,14 @@
 namespace LCI\MODX\Orchestrator;
 
 use LCI\Blend\Blender;
+use LCI\Blend\Helpers\Files;
 use LCI\MODX\Console\Console;
 use LCI\MODX\Console\Helpers\VoidUserInteractionHandler;
 
 class Orchestrator
 {
+    use Files;
+
     /** @var \modX */
     public static $modx;
 
@@ -50,12 +53,38 @@ class Orchestrator
     }
 
     /**
-     * @param $dir
-     * @param string $destination
+     * @param string $package ~ ex: lci/stockpile
+     * @TODO Review ~ this is called on via a post composer script set up in extra
+     *
      */
-    public static function copyAssets($dir, $destination=MODX_ASSETS_PATH)
+    public static function copyAssets($package)
     {
-        // @TODO
+        // public will copy into the MODX public root path
+        // assets will keep the same pathing
+        $package_path = self::getPackagePath($package, false);
+
+        $console = new Console();
+        $config = $console->getConfig();
+
+        $self = new Orchestrator();
+
+        if (file_exists($package_path . 'public')) {
+            $destination = MODX_BASE_PATH;
+            if (isset($config['LCI_ORCHESTRATOR_PUBLIC_PATH']) && file_exists($config['LCI_ORCHESTRATOR_PUBLIC_PATH'])) {
+                $destination = $config['LCI_ORCHESTRATOR_PUBLIC_PATH'];
+            }
+
+            $self->copyDirectory($package_path . 'public', $destination);
+        }
+
+        if (file_exists($package_path . 'assets')) {
+            $destination = MODX_ASSETS_PATH;
+            if (isset($config['LCI_ORCHESTRATOR_ASSETS_PATH']) && file_exists($config['LCI_ORCHESTRATOR_ASSETS_PATH'])) {
+                $destination = $config['LCI_ORCHESTRATOR_ASSETS_PATH'];
+            }
+
+            $self->copyDirectory($package_path . 'assets', $destination);
+        }
     }
 
     /**
@@ -88,6 +117,7 @@ class Orchestrator
     {
         $path = static ::getPackagePath($project);
 
+        self::copyAssets($project);
         self::runMigrations(['blend_modx_migration_dir' => $path], 'up', $type);
     }
 
@@ -99,6 +129,7 @@ class Orchestrator
     {
         $path = static ::getPackagePath($project);
 
+        self::copyAssets($project);
         self::runMigrations(['blend_modx_migration_dir' => $path], 'up', $type);
     }
 
@@ -110,6 +141,7 @@ class Orchestrator
     {
         $path = static ::getPackagePath($project);
 
+        // @TODO remove assets
         self::runMigrations(['blend_modx_migration_dir' => $path], 'down', $type);
     }
 
@@ -139,9 +171,10 @@ class Orchestrator
 
     /**
      * @param string $package
+     * @param bool $include_src
      * @return string
      */
-    protected static function getPackagePath($package='lci/orchestrator')
+    protected static function getPackagePath($package='lci/orchestrator', $include_src = true)
     {
         if (empty(static::$modx)) {
             /** @var \LCI\MODX\Console\Console $console */
@@ -154,7 +187,11 @@ class Orchestrator
             null,
             (defined('MODX_CORE_PATH') ? MODX_CORE_PATH.'vendor/' : dirname(__DIR__))
         );
-        $path .= $package . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+        $path .= $package . DIRECTORY_SEPARATOR;
+
+        if ($include_src) {
+            $path .= 'src' . DIRECTORY_SEPARATOR;
+        }
 
         return $path;
     }
