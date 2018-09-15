@@ -42,6 +42,10 @@ For automatic install see the [LocalOrchestrator Example](https://github.com/Lip
 
 ### composer.json 
 
+@TODO Fix BLend: (BLEND_MY_MIGRATION_PATH ~ set local path & separate out a new Generate Command, no MODX requirement
+@TODO Blend add package/project column
+@TODO Make Blend install migrations follow updated strategy 
+
 **Optional create your composer.json file, this will get the latest commit**
 ```json
 {
@@ -60,7 +64,7 @@ For automatic install see the [LocalOrchestrator Example](https://github.com/Lip
 }
 ```
 
-### Orchestrator will install in MODX
+### Orchestrator will install elements inside of MODX
 
 [See Install](src/database/migrations/InstallOrchestrator.php) for complete details
 
@@ -74,6 +78,21 @@ static then each change to an element would need to be in noted the related upda
 autoloader.
 4. System setting (orchestrator.vendor_path)  
 Used in the requireComposerAutoloader plugin to map to the correct autoloader file
+
+## Configure with .env
+
+If you want to configure Orchestrator or any project that is using Orchestrator, create a .env file in the core directory.
+
+Property | Description | Default
+--- | --- | --- 
+BLEND_LOCAL_MIGRATION_PATH | Path to where you would like local Blend Migration files | MODX_CORE_PATH.'components/blend/'
+**Orchestrator packages install & update** | | 
+LCI_ORCHESTRATOR_ASSETS_PATH | Path in your project where files are copied into from an Orchestrator package assets directory | MODX_ASSETS_PATH
+LCI_ORCHESTRATOR_PUBLIC_PATH | Path in your project where files are copied into from an Orchestrator package public directory | MODX_BASE_PATH
+**Orchestrator Install Only** |  |  
+LCI_ORCHESTRATOR_BASE_PATH | Relative path to the composer vendor directory to define the MediaSource on install | core/vendor/
+LCI_ORCHESTRATOR_BASE_URL | Relative path to the composer vendor directory to define the MediaSource on install | core/vendor/
+LCI_ORCHESTRATOR_VENDOR_PATH | Path to the composer vendor directory | MODX_CORE_PATH .'vendor/'
 
 
 ## @TODO 
