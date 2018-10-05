@@ -34,7 +34,7 @@ class InstallOrchestrator extends Migrations
         }
 
         // 2. Media source
-        $orchestratorMediaSource = $this->blender->getBlendableMediaSource('orchestrator');
+        $orchestratorMediaSource = $this->blender->getBlendableLoader()->getBlendableMediaSource('orchestrator');
         $saved = $orchestratorMediaSource
             ->setFieldDescription('Orchestrator packages')
             ->setPropertyBasePath(!$custom_base_path ? 'core/vendor/' : $custom_base_path)
@@ -49,7 +49,7 @@ class InstallOrchestrator extends Migrations
 
         // 3. System setting
         /** @var \LCI\Blend\Blendable\SystemSetting $systemSetting */
-        $systemSetting = $this->blender->getBlendableSystemSetting('orchestrator.vendor_path');
+        $systemSetting = $this->blender->getBlendableLoader()->getBlendableSystemSetting('orchestrator.vendor_path');
         $saved = $systemSetting
             ->setSeedsDir($this->getSeedsDir())
             ->setFieldValue(!$custom_vendor_path ? MODX_CORE_PATH.'vendor/' : $custom_vendor_path)
@@ -60,23 +60,23 @@ class InstallOrchestrator extends Migrations
         if ($saved) {
             $this->blender->outSuccess('orchestrator.vendor_path System Setting has been created');
         } else {
-            $this->blender->out('orchestrator.vendor_path System Setting was not created', true);
+            $this->blender->outError('orchestrator.vendor_path System Setting was not created');
         }
 
         // 4. plugin
-        $plugin = $this->blender->getBlendablePlugin('requireComposerAutoloader');
+        $plugin = $this->blender->getBlendableLoader()->getBlendablePlugin('requireComposerAutoloader');
 
         $saved = $plugin
             ->setFieldCategory('Orchestrator')
             ->setFieldDescription('Will load the composer autoloader.php file inside of MODX')
-            ->setAsStatic('lci/orchestrator/src/elements/plugins/requireComposerAutoloader.php', 'Orchestrator')
+            ->setAsStatic('lci/orchestrator/src/elements/plugins/requireComposerAutoloader.php', 'orchestrator')
             ->attachOnEvent('OnInitCulture')
             ->blend();
 
         if ($saved) {
             $this->blender->outSuccess('requireComposerAutoloader Plugin has been installed');
         } else {
-            $this->blender->out('requireComposerAutoloader Plugin has been installed', true);
+            $this->blender->outError('requireComposerAutoloader Plugin has been installed');
         }
 
         $this->modx->cacheManager->refresh();
@@ -93,7 +93,7 @@ class InstallOrchestrator extends Migrations
         $manager = $this->modx->getManager();
 
         // 4. plugin
-        $plugin = $this->blender->getBlendablePlugin('requireComposerAutoloader');
+        $plugin = $this->blender->getBlendableLoader()->getBlendablePlugin('requireComposerAutoloader');
 
         if ($plugin->revertBlend()) {
             $this->blender->outSuccess('requireComposerAutoloader Plugin has been reverted');
@@ -103,7 +103,7 @@ class InstallOrchestrator extends Migrations
 
         // 3. System setting
         /** @var \LCI\Blend\Blendable\SystemSetting $systemSetting */
-        $systemSetting = $this->blender->getBlendableSystemSetting('orchestrator.vendor_path');
+        $systemSetting = $this->blender->getBlendableLoader()->getBlendableSystemSetting('orchestrator.vendor_path');
         if ($systemSetting->revertBlend()) {
             $this->blender->outSuccess('orchestrator.vendor_path System Setting has been reverted');
         } else {
@@ -111,7 +111,7 @@ class InstallOrchestrator extends Migrations
         }
 
         // 2. Media source
-        $orchestratorMediaSource = $this->blender->getBlendableMediaSource('orchestrator');
+        $orchestratorMediaSource = $this->blender->getBlendableLoader()->getBlendableMediaSource('orchestrator');
         if ($orchestratorMediaSource->revertBlend()) {
             $this->blender->outSuccess('orchestrator MediaSource has been reverted');
         } else {

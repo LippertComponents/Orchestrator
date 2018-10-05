@@ -18,8 +18,8 @@
   },
   "require": {
     "php" : ">=7.0.0",
-    "lci/blend": "^1.0.0",
-    "lci/console": "^1.0.3",
+    "lci/blend": "^1.0.0-beta14",
+    "lci/console": "^1.0.7",
     "composer-plugin-api": "^1.1"
   },
   "extra": {
@@ -34,7 +34,7 @@
     "post-update-cmd": [
       "LCI\\MODX\\Orchestrator\\ComposerHelper::update"
     ],
-    "post-package-uninstall": [
+    "pre-package-uninstall": [
       "LCI\\MODX\\Orchestrator\\ComposerHelper::uninstall"
     ]
   },
