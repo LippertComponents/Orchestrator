@@ -29,10 +29,7 @@ class ComposerHelper
         $vendorDir = $composer->getConfig()->get('vendor-dir');
         require $vendorDir . '/autoload.php';
 
-        // --no-blend
-        if (!in_array('no-blend', $args)) {
-            Orchestrator::installComposerPackage('lci\blend');
-        }
+        Orchestrator::installComposerPackage('lci\blend');
         Orchestrator::install();
 
         /** @var Package $package */
@@ -58,10 +55,7 @@ class ComposerHelper
         require $vendorDir . '/autoload.php';
 
         Orchestrator::install();
-        // -- no-blend
-        if (!in_array('no-blend', $args)) {
-            Orchestrator::updateComposerPackage('lci\blend');
-        }
+        Orchestrator::updateComposerPackage('lci\blend');
 
         /** @var Package $package */
         $package = $composer->getPackage();
