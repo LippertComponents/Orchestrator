@@ -149,6 +149,9 @@ src/
   Proper Namespace for your PHP Classes
 ```
 
+Contents in the public directory will be copied to the public web root directory. You can also use the assets, it will be copied
+over to the public web root directory as well.
+
 ### Elements
 
 Best practice is to set your elements as static. In your migration file add them like the following:
