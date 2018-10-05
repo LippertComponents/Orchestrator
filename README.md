@@ -42,12 +42,14 @@ For automatic install see the [LocalOrchestrator Example](https://github.com/Lip
 
 **Note**
 
-If you already have composer set up or you do not have MODX installed, run:
-```composer install --no-scripts```
+If you already have composer set up or you do not have MODX installed, local project, run appropriate:  
+```composer install --no-scripts```  
+or  
 ```composer update --no-scripts```
 
-This will prevent the install migrations running and erroring out. Then you can just run either:
-```composer run-script post-install-cmd```
+This will prevent the install migrations running and erroring out. Then you can just run either:  
+```composer run-script post-install-cmd```  
+or  
 ```composer run-script post-update-cmd```
 
 ### composer.json 
