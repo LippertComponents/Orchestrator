@@ -40,25 +40,25 @@ For automatic install see the [LocalOrchestrator Example](https://github.com/Lip
 6. Then run command to install ```php vendor/bin/orchestrator orchestrator:install```
 7. May also need to do: ```php vendor/bin/blend``` this will register the blend commands within orchestrator
 
-### composer.json 
+**Note**
 
-@TODO Fix BLend: (BLEND_MY_MIGRATION_PATH ~ set local path & separate out a new Generate Command, no MODX requirement
-@TODO Blend add package/project column
-@TODO Make Blend install migrations follow updated strategy 
+If you already have composer set up or you do not have MODX installed, run:
+```composer install --no-scripts```
+```composer update --no-scripts```
+
+This will prevent the install migrations running and erroring out. Then you can just run either:
+```composer run-script post-install-cmd```
+```composer run-script post-update-cmd```
+
+### composer.json 
 
 **Optional create your composer.json file, this will get the latest commit**
 ```json
 {
 
   "require": {
-       "lci/orchestrator": "dev-master"
+       "lci/orchestrator": "^1.0.0"
    },
-  "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/LippertComponents/Orchestrator"
-        }
-    ],
 
   "minimum-stability": "dev"
 }
@@ -97,7 +97,7 @@ LCI_ORCHESTRATOR_VENDOR_PATH | Path to the composer vendor directory | MODX_CORE
 
 ## @TODO 
 
- - [ ] Properly run composer.json scripts on install & update
+ - [x] Properly run composer.json scripts on install & update
  - [ ] Copy assets method
  - [ ] Tests
  - [ ] Helper Method to add in package path on blend->static
@@ -111,20 +111,20 @@ An example project
 
 ```json
 {
-  "name": "lci/modxcore",
+  "name": "lci/modx-core",
   "require": {
-       "lci/orchestrator": "dev-master"
+       "lci/orchestrator": "^1.0.0"
    },
-  "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/LippertComponents/Orchestrator"
-        }
-    ],
 
   "minimum-stability": "dev"
 }
 ```
+
+## Manually run a specific package's Blend Migration files 
+
+```
+php vendor/bin/orchestrator orchestrator:package lci/blend
+``` 
 
 ## Your extended project directory structure
 
@@ -148,4 +148,23 @@ src/
   --
   Proper Namespace for your PHP Classes
 ```
+
+### Elements
+
+Best practice is to set your elements as static. In your migration file add them like the following:
+
+```php
+<?php
+$chunk = $this->blender->getBlendableChunk('myChunk');
+
+// replace my/package with your Composer Package name as listed on your composer.json file
+// Then the full relative file path of your file
+$chunk
+    //  file path                                          Media Source name, orchestrator will put it in the correct place
+    ->setAsStatic('my/package/src/elements/chunk/myChunk.tpl', 'orchestrator')
+    // ...
+    ->blend();
+
+```
+
 
