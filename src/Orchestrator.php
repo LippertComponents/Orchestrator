@@ -21,17 +21,17 @@ class Orchestrator
     public static $modx;
 
     /**
-     *
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function install()
     {
         $path = static::getPackagePath();
 
-        self::runMigrations(['blend_modx_migration_dir' => $path]);
+        self::runMigrations('lci/orchestrator', ['blend_modx_migration_dir' => $path]);
     }
 
     /**
-     *
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function uninstall()
     {
@@ -112,45 +112,52 @@ class Orchestrator
     /**
      * @param string $project ~ a valid composer project like lci/blend
      * @param string $type
+     *
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function installComposerPackage($project, $type='master')
     {
         $path = static ::getPackagePath($project);
 
         self::copyAssets($project);
-        self::runMigrations(['blend_modx_migration_dir' => $path], 'up', $type);
+        self::runMigrations($project, ['blend_modx_migration_dir' => $path], 'up', $type);
     }
 
     /**
      * @param string $project ~ a valid composer project like lci/blend
      * @param string $type
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function updateComposerPackage($project, $type='master')
     {
         $path = static ::getPackagePath($project);
 
         self::copyAssets($project);
-        self::runMigrations(['blend_modx_migration_dir' => $path], 'up', $type);
+        self::runMigrations($project, ['blend_modx_migration_dir' => $path], 'up', $type);
     }
 
     /**
      * @param string $project ~ a valid composer project like lci/blend
      * @param string $type
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function uninstallComposerPackage($project, $type='master')
     {
         $path = static ::getPackagePath($project);
 
         // @TODO remove assets
-        self::runMigrations(['blend_modx_migration_dir' => $path], 'down', $type);
+        self::runMigrations($project, ['blend_modx_migration_dir' => $path], 'down', $type);
     }
 
     /**
+     * @param string $project
      * @param array $config
      * @param string $method
      * @param string $type
+     *
+     * @throws \LCI\Blend\Exception\MigratorException
      */
-    protected static function runMigrations($config=[], $method='up', $type='master')
+    protected static function runMigrations($project, $config=[], $method='up', $type='master')
     {
         /** @var \LCI\MODX\Console\Console $console */
         $console = new Console();
@@ -164,6 +171,8 @@ class Orchestrator
         if (!$blender->isBlendInstalledInModx()) {
             $blender->install();
         }
+
+        $blender->setProject($project);
 
         // 2. run Migrations
         $blender->runMigration($method, $type);
