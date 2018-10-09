@@ -18,6 +18,7 @@ class ComposerHelper
 {
     /**
      * @param Event $event
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function install(Event $event)
     {
@@ -29,7 +30,7 @@ class ComposerHelper
         $vendorDir = $composer->getConfig()->get('vendor-dir');
         require $vendorDir . '/autoload.php';
 
-        Orchestrator::installComposerPackage('lci\blend');
+        Orchestrator::installComposerPackage('lci/blend');
         Orchestrator::install();
 
         /** @var Package $package */
@@ -45,6 +46,7 @@ class ComposerHelper
 
     /**
      * @param Event $event
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function update(Event $event)
     {
@@ -55,7 +57,7 @@ class ComposerHelper
         require $vendorDir . '/autoload.php';
 
         Orchestrator::install();
-        Orchestrator::updateComposerPackage('lci\blend');
+        Orchestrator::updateComposerPackage('lci/blend');
 
         /** @var Package $package */
         $package = $composer->getPackage();
@@ -70,6 +72,7 @@ class ComposerHelper
 
     /**
      * @param PackageEvent $event
+     * @throws \LCI\Blend\Exception\MigratorException
      */
     public static function uninstall(PackageEvent $event)
     {
@@ -95,7 +98,7 @@ class ComposerHelper
             Orchestrator::uninstall();
             // --leave-blend
             if (!isset($args['leave-blend'])) {
-                Orchestrator::uninstallComposerPackage('lci\blend');
+                Orchestrator::uninstallComposerPackage('lci/blend');
             }
 
         } elseif (self::isValidAutoInstall($currentPackage->getName(), $localPackage->getExtra())) {
