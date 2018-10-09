@@ -67,6 +67,7 @@ class Orchestrator
         $config = $console->getConfig();
 
         $self = new Orchestrator();
+        $self->setMode('755');
 
         if (file_exists($package_path . 'public')) {
             $destination = MODX_BASE_PATH;
