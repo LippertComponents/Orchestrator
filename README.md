@@ -1,3 +1,5 @@
+[![Build Status](https://scrutinizer-ci.com/g/LippertComponents/Orchestrator/badges/build.png?b=master)](https://scrutinizer-ci.com/g/LippertComponents/Orchestrator/)
+
 # Orchestrator
 
 Allowing developers to use MODX along with composer managed packages utilizing Blend Migrations and using lci/console for cli commands.
