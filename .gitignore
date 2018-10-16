@@ -140,3 +140,4 @@ Temporary Items
 .apdisk
 /composer.lock
 /vendor/
+/.env

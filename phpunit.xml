@@ -1,0 +1,7 @@
+<phpunit bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="commands">
+            <file>tests/Commands/PackageTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
