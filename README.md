@@ -1,4 +1,5 @@
 [![Build Status](https://scrutinizer-ci.com/g/LippertComponents/Orchestrator/badges/build.png?b=master)](https://scrutinizer-ci.com/g/LippertComponents/Orchestrator/)
+[![Scrutinizer](https://scrutinizer-ci.com/g/LippertComponents/Orchestrator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LippertComponents/Orchestrator/)
 
 # Orchestrator
 
