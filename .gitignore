@@ -141,3 +141,4 @@ Temporary Items
 /composer.lock
 /vendor/
 /.env
+/src/database/history/
