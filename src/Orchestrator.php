@@ -25,7 +25,10 @@ class Orchestrator
      */
     public static function install()
     {
-        $path = static::getPackagePath();
+        $path = getenv('LCI_ORCHESTRATOR_MIGRATION_PATH');
+        if (empty($path)) {
+            $path = static::getPackagePath();
+        }
 
         self::runMigrations('lci/orchestrator', ['blend_modx_migration_dir' => $path]);
     }
@@ -40,7 +43,12 @@ class Orchestrator
         // 1. install BLend
         $handler = new VoidUserInteractionHandler();
 
-        $blender = new Blender($console->loadMODX(), $handler, ['blend_modx_migration_dir' => __DIR__]);
+        $path = getenv('LCI_ORCHESTRATOR_MIGRATION_PATH');
+        if (empty($path)) {
+            $path = static::getPackagePath();
+        }
+
+        $blender = new Blender($console->loadMODX(), $handler, ['blend_modx_migration_dir' => $path]);
 
         if (!$blender->isBlendInstalledInModx()) {
             $blender->install();
@@ -67,7 +75,7 @@ class Orchestrator
         $config = $console->getConfig();
 
         $self = new Orchestrator();
-        $self->setMode('755');
+        $self->setMode(0755);
 
         if (file_exists($package_path . 'public')) {
             $destination = MODX_BASE_PATH;
@@ -88,28 +96,6 @@ class Orchestrator
         }
     }
 
-    /**
-     * @param $project
-     * @param $file
-     *
-     * assume a MODX structure for elements
-     * public/
-     * src/
-     *   elements/
-     *      chunks/
-     *      snippets/
-     *      plugins/
-     *      templates/
-     *   lexicon/
-     *   modal/ ~ ??? still need non namespaced xPDO classes
-     *   processors/ ~ still need non namespaced MODX classes
-     *  Namespaced PHP Classes
-     *
-     * the core/components/project/docs is replaced with a root
-     * README.md
-     * Changelog.md
-     * license can just be defined in the composer.json file
-     */
     /**
      * @param string $project ~ a valid composer project like lci/blend
      * @param string $type

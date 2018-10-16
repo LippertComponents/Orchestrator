@@ -18,9 +18,8 @@
   },
   "require": {
     "php" : ">=7.0.0",
-    "lci/blend": "^1.0.0-beta14",
-    "lci/console": "^1.0.7",
-    "composer-plugin-api": "^1.1"
+    "lci/blend": "^1.0.0",
+    "lci/console": "^1.0.7"
   },
   "extra": {
     "auto-install": [
@@ -44,6 +43,5 @@
   "require-dev": {
     "phpunit/phpunit": "^6"
   },
-  "minimum-stability": "dev",
   "prefer-stable": true
 }
