@@ -1,4 +1,8 @@
 build:
+  dependencies:
+    # Overwrites inferred commands
+    override:
+    - 'composer install --no-interaction --prefer-source --no-scripts'
   nodes:
     tests:
       dependencies:
