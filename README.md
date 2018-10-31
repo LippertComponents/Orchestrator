@@ -39,7 +39,7 @@ For automatic install see the [LocalOrchestrator Example](https://github.com/Lip
 **Manual steps**
 
 4. Optionally create a composer.json file, see below for example. 
-5. Run ```composer install lci/orchestrator``` or ```composer require lci/orchestrator```
+5. Run ```composer install``` if you created a composer.json file or ```composer require lci/orchestrator```
 6. Then run command to install ```php vendor/bin/orchestrator orchestrator:install```
 7. May also need to do: ```php vendor/bin/blend``` this will register the blend commands within orchestrator
 
