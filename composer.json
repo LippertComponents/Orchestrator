@@ -19,8 +19,8 @@
   "require": {
     "php" : ">=7.0.0",
     "ext-SimpleXML": "*",
-    "lci/blend": "^1.0.0",
-    "lci/console": "^1.0.7"
+    "lci/blend": "^1.1.7",
+    "lci/console": "^1.1.2"
   },
   "extra": {
     "auto-install": [

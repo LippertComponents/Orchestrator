@@ -16,6 +16,7 @@ if (defined('ORCHESTRATOR_AUTOLOAD') && ORCHESTRATOR_AUTOLOAD) {
     if (file_exists($file)) {
         require_once $file;
 
+        \LCI\MODX\Console\Console::loadEnv();
     } else {
         $modx->log('', '[Orchestrator] composer autoload.php file was not found, check systems setting: orchestrator.vendor_path');
     }

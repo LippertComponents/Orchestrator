@@ -101,13 +101,11 @@ LCI_ORCHESTRATOR_BASE_PATH | Relative path to the composer vendor directory to d
 LCI_ORCHESTRATOR_BASE_URL | Relative path to the composer vendor directory to define the MediaSource on install | core/vendor/
 LCI_ORCHESTRATOR_VENDOR_PATH | Path to the composer vendor directory | MODX_CORE_PATH .'vendor/'
 
+## Updating
 
-## @TODO 
-
- - [x] Properly run composer.json scripts on install & update
- - [ ] Copy assets method
- - [ ] Tests
- - [ ] Helper Method to add in package path on blend->static
+Will need to redesign this but for now copy the file in `core/vendor/lci/console/src/cache/package_commands.php`
+before you do any `composer update` as this file will be deleted by composer when the lci/console package gets updated.
+Meaning going from v1.0.7 to v1.1.2. The package_commands file saves any previously added commands.
  
  
 ## Using Orchestrator in your package/extra
@@ -120,7 +118,7 @@ An example project
 {
   "name": "lci/modx-core",
   "require": {
-       "lci/orchestrator": "^1.0.0"
+       "lci/orchestrator": "^1.1.0"
    },
 
   "minimum-stability": "dev"
@@ -165,7 +163,7 @@ Best practice is to set your elements as static. In your migration file add them
 
 ```php
 <?php
-$chunk = $this->blender->getBlendableChunk('myChunk');
+$chunk = $this->blender->getBlendableLoader()->getBlendableChunk('myChunk');
 
 // replace my/package with your Composer Package name as listed on your composer.json file
 // Then the full relative file path of your file
