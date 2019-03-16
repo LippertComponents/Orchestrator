@@ -62,7 +62,7 @@ or
 {
 
   "require": {
-       "lci/orchestrator": "^1.0.0"
+       "lci/orchestrator": "^1.2.0"
    },
 
   "minimum-stability": "dev"
@@ -103,10 +103,26 @@ LCI_ORCHESTRATOR_VENDOR_PATH | Path to the composer vendor directory | MODX_CORE
 
 ## Updating
 
-Will need to redesign this but for now copy the file in `core/vendor/lci/console/src/cache/package_commands.php`
-before you do any `composer update` as this file will be deleted by composer when the lci/console package gets updated.
-Meaning going from v1.0.7 to v1.1.2. The package_commands file saves any previously added commands.
+From v1.1 to v1.2 the dependant package lci/console moved the config from `core/vendor/lci/console/src/cache/*` to 
+`core/config/lci_console_*`. Manually copy before running composer update.
+
+Main config file, pre v1.2 is in `core/vendor/lci/console/src/cache/package_commands.php` 
+The package_commands file saves any previously added commands.
  
+If the `core/vendor/lci/console/src/cache/package_commands.php` file got deleted and you don't have a backup then 
+do a search in core/vendor/lci directory for all files with: `->registerPackageCommands(` and put all of the classes 
+into the array like below.
+
+The contents of the `core/vendor/lci/console/src/cache/package_commands.php` file will look similar to this:
+```php
+<?php 
+return array (
+  0 => 'LCI\\Blend\\Console\\ActivePackageCommands',
+  1 => 'LCI\\MODX\\Orchestrator\\Console\\ActivePackageCommands',
+  2 => 'LCI\\MODX\\Stockpile\\Console\\ActivePackageCommands',
+);
+
+```
  
 ## Using Orchestrator in your package/extra
 
@@ -118,7 +134,7 @@ An example project
 {
   "name": "lci/modx-core",
   "require": {
-       "lci/orchestrator": "^1.1.0"
+       "lci/orchestrator": "^1.2.0"
    },
 
   "minimum-stability": "dev"
