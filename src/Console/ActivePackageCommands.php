@@ -14,7 +14,8 @@ class ActivePackageCommands implements PackageCommands
     /** @var array  */
     protected $commands = [
         'orchestrator_installed' => [
-            'LCI\MODX\Orchestrator\Console\Command\InstallPackages'
+            'LCI\MODX\Orchestrator\Console\Command\InstallPackages',
+            'LCI\MODX\Orchestrator\Console\Command\UninstallPackages'
         ],
         'orchestrator_not_installed' => [
             'LCI\MODX\Orchestrator\Console\Command\Package'

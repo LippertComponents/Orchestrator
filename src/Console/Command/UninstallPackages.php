@@ -9,16 +9,16 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class InstallPackages extends BaseCommand
+class UninstallPackages extends BaseCommand
 {
     public $loadMODX = true;
 
     protected function configure()
     {
         $this
-            ->setName('orchestrator:package')
-            ->setAliases(['orch-package'])
-            ->setDescription('Install/Update Package, please first run: composer require some/package');
+            ->setName('orchestrator:remove')
+            ->setAliases(['orch-remove'])
+            ->setDescription('Uninstall Package, this will run migrations down for related packages');
 
         $this->addArgument(
             'package',
@@ -48,8 +48,8 @@ class InstallPackages extends BaseCommand
         $type = $input->getOption('type');
 
         foreach ($packages as $package) {
-            $output->writeln('### Orchestrator::installComposerPackage() for '.$package.' and type: '.$type.'  ###');
-            Orchestrator::installComposerPackage($package, $type);
+            $output->writeln('### Orchestrator::uninstallComposerPackage() for '.$package.' and type: '.$type.'  ###');
+            Orchestrator::uninstallComposerPackage($package, $type);
         }
     }
 }
