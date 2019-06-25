@@ -39,6 +39,7 @@ class Orchestrator
             $path = static::getPackagePath();
         }
 
+        self::savePackageConfig('lci/orchestrator');
         self::runMigrations('lci/orchestrator', ['blend_modx_migration_dir' => $path]);
     }
 

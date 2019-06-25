@@ -51,5 +51,7 @@ class InstallPackages extends BaseCommand
             $output->writeln('### Orchestrator::installComposerPackage() for '.$package.' and type: '.$type.'  ###');
             Orchestrator::installComposerPackage($package, $type);
         }
+
+        $output->writeln($this->getRunStats());
     }
 }

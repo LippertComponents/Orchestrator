@@ -57,13 +57,13 @@ class DeployCommand extends BaseCommand
         }
 
         if ($describe) {
-            $output->writeln('Class: '. get_class($orchestratorDeploy));
+            $output->writeln(PHP_EOL.'### Class: '. get_class($orchestratorDeploy).PHP_EOL);
             $orchestratorDeploy->describe($output);
 
         } else {
             $orchestratorDeploy->run($input, $output);
         }
 
-        $output->writeln($this->getRunStats());
+        $output->writeln(PHP_EOL.$this->getRunStats());
     }
 }

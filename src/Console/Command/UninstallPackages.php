@@ -51,5 +51,7 @@ class UninstallPackages extends BaseCommand
             $output->writeln('### Orchestrator::uninstallComposerPackage() for '.$package.' and type: '.$type.'  ###');
             Orchestrator::uninstallComposerPackage($package, $type);
         }
+
+        $output->writeln($this->getRunStats());
     }
 }

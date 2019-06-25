@@ -48,12 +48,14 @@ class Deploy implements DeployInterface
         $question = new ConfirmationQuestion('Clear MODX cache before running migrations?', true);
 
         if ($helper->ask($input, $output, $question)) {
-            $output->write($this->clearMODXCache($input, $output));
+            $output->writeln($this->clearMODXCache($input, $output));
         }
 
         // run all package migrations
+        $output->writeln(PHP_EOL.'### Orchestrator package Blend migrations');
         Orchestrator::updateAllOrchestratorComposerPackages();
 
+        $output->writeln(PHP_EOL.'### Local Blend migrations');
         // run local blend migrations
         $this->runLocalBlendMigration($input, $output);
 
@@ -61,7 +63,7 @@ class Deploy implements DeployInterface
         $question = new ConfirmationQuestion('Migrations have been ran, clear MODX cache again?', true);
 
         if ($helper->ask($input, $output, $question)) {
-            $output->write($this->clearMODXCache($input, $output));
+            $output->writeln($this->clearMODXCache($input, $output));
         }
 
         $this->runAfter($input, $output);
