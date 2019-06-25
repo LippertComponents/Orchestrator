@@ -37,10 +37,13 @@ class ComposerHelper
         $package = $composer->getPackage();
         $extra = $package->getExtra();
 
+        /** @deprecated in favor of deploy commands */
         if (isset($extra['auto-install']) && is_array($extra['auto-install'])) {
             foreach ($extra['auto-install'] as $orchestrator_package) {
                 Orchestrator::installComposerPackage($orchestrator_package);
             }
+        } else {
+            Orchestrator::updateAllOrchestratorComposerPackages();
         }
     }
 
@@ -63,10 +66,13 @@ class ComposerHelper
         $package = $composer->getPackage();
         $extra = $package->getExtra();
 
+        /** @deprecated in favor of deploy commands */
         if (isset($extra['auto-install']) && is_array($extra['auto-install'])) {
             foreach ($extra['auto-install'] as $orchestrator_package) {
                 Orchestrator::updateComposerPackage($orchestrator_package);
             }
+        } else {
+            Orchestrator::updateAllOrchestratorComposerPackages();
         }
     }
 
@@ -106,6 +112,13 @@ class ComposerHelper
         }
     }
 
+    /**
+     * @deprecated in favor of deploy commands
+     *
+     * @param $package_name
+     * @param $extra
+     * @return bool
+     */
     protected static function isValidAutoInstall($package_name, $extra)
     {
         if (isset($extra['auto-install']) && is_array($extra['auto-install']) && in_array($package_name, $extra['auto-install'])) {

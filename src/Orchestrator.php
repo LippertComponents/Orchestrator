@@ -20,6 +20,15 @@ class Orchestrator
     /** @var \modX */
     public static $modx;
 
+    /** @var bool|Console */
+    protected static $console = false;
+
+    /** @var string */
+    protected static $package_file;
+
+    /** @var bool|array */
+    protected static $packages = false;
+
     /**
      * @throws \LCI\Blend\Exception\MigratorException
      */
@@ -39,7 +48,7 @@ class Orchestrator
     public static function uninstall()
     {
         /** @var \LCI\MODX\Console\Console $console */
-        $console = new Console();
+        $console = static::getConsole();
         // 1. install BLend
         $handler = new VoidUserInteractionHandler();
 
@@ -71,7 +80,7 @@ class Orchestrator
         // assets will keep the same pathing
         $package_path = self::getPackagePath($package, false);
 
-        $console = new Console();
+        $console = static::getConsole();
         $config = $console->getConfig();
 
         $self = new Orchestrator();
@@ -106,6 +115,7 @@ class Orchestrator
     {
         $path = static ::getPackagePath($project);
 
+        self::savePackageConfig($project);
         self::copyAssets($project);
         self::runMigrations($project, ['blend_modx_migration_dir' => $path], 'up', $type);
     }
@@ -119,8 +129,21 @@ class Orchestrator
     {
         $path = static ::getPackagePath($project);
 
+        self::savePackageConfig($project);
         self::copyAssets($project);
         self::runMigrations($project, ['blend_modx_migration_dir' => $path], 'up', $type);
+    }
+
+    /**
+     * @throws \LCI\Blend\Exception\MigratorException
+     */
+    public static function updateAllOrchestratorComposerPackages()
+    {
+        static::loadOrchestratorPackageInfo();
+
+        foreach(static::$packages as $existing_package) {
+            static::updateComposerPackage($existing_package);
+        }
     }
 
     /**
@@ -132,6 +155,7 @@ class Orchestrator
     {
         $path = static ::getPackagePath($project);
 
+        self::savePackageConfig($project);
         // @TODO remove assets
         self::runMigrations($project, ['blend_modx_migration_dir' => $path], 'down', $type);
     }
@@ -147,7 +171,7 @@ class Orchestrator
     protected static function runMigrations($project, $config=[], $method='up', $type='master')
     {
         /** @var \LCI\MODX\Console\Console $console */
-        $console = new Console();
+        $console = static::getConsole();
         static::$modx = $console->loadMODX();
 
         // 1. install BLend
@@ -174,7 +198,7 @@ class Orchestrator
     {
         if (empty(static::$modx)) {
             /** @var \LCI\MODX\Console\Console $console */
-            $console = new Console();
+            $console = static::getConsole();
             static::$modx = $console->loadMODX();
         }
 
@@ -190,5 +214,87 @@ class Orchestrator
         }
 
         return $path;
+    }
+
+    /**
+     * @return \LCI\MODX\Console\Console
+     */
+    protected static function getConsole()
+    {
+        if (!static::$console) {
+            /** @var \LCI\MODX\Console\Console $console */
+            static::$console = new Console();
+        }
+
+        return static::$console;
+    }
+
+    /**
+     *
+     */
+    protected static function loadOrchestratorPackageInfo()
+    {
+        /** @var \LCI\MODX\Console\Console $console */
+        $console = static::getConsole();
+
+        if (empty(static::$modx)) {
+            static::$modx = $console->loadMODX();
+        }
+
+        if (!static::$packages) {
+            static::$packages = [];
+
+            static::$package_file = $console->getConfigFilePaths()['config_dir'] . 'lci_orchestrator_package.php';
+
+            if (file_exists(static::$package_file)) {
+                static::$packages = include static::$package_file;
+            }
+        }
+    }
+
+    /**
+     * @param string $package
+     */
+    protected static function removePackageConfig($package)
+    {
+        static::loadOrchestratorPackageInfo();
+        if (in_array($package, static::$packages)) {
+            $temp = [];
+            foreach(static::$packages as $existing_package) {
+                if ($existing_package == $package) {
+                    continue;
+                }
+
+                $temp[] = $existing_package;
+            }
+            static::$packages = $temp;
+
+            static::writeCacheFile(static::$package_file, static::$packages);
+        }
+    }
+
+    /**
+     * @param string $package
+     */
+    protected static function savePackageConfig($package)
+    {
+        static::loadOrchestratorPackageInfo();
+        if (!in_array($package, static::$packages) && file_exists(static::getPackagePath($package, false))) {
+            static::$packages[] = $package;
+
+            static::writeCacheFile(static::$package_file, static::$packages);
+        }
+    }
+
+    /**
+     * @param string $file
+     * @param array $data
+     */
+    protected static function writeCacheFile($file, $data)
+    {
+        $content = '<?php ' . PHP_EOL .
+            'return ' . var_export($data, true) . ';';
+
+        file_put_contents($file, $content);
     }
 }
