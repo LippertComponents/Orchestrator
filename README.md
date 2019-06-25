@@ -100,6 +100,8 @@ LCI_ORCHESTRATOR_MIGRATION_PATH | Path to src of Orchestrator, set only if you d
 LCI_ORCHESTRATOR_BASE_PATH | Relative path to the composer vendor directory to define the MediaSource on install | core/vendor/
 LCI_ORCHESTRATOR_BASE_URL | Relative path to the composer vendor directory to define the MediaSource on install | core/vendor/
 LCI_ORCHESTRATOR_VENDOR_PATH | Path to the composer vendor directory | MODX_CORE_PATH .'vendor/'
+**Optional** |  |  
+LCI_MODX_ORCHESTRATOR_DEPLOY_EXTENDED_CLASS | [FQN](https://www.php.net/manual/en/language.namespaces.rules.php) of a Custom class that implements LCI\MODX\Orchestrator\Deploy\DeployInterface | LCI\MODX\Orchestrator\Deploy\Deploy
 
 ## Updating
 
