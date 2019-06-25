@@ -71,6 +71,14 @@ class Orchestrator
 
     /**
      * @param string $package ~ ex: lci/stockpile
+     */
+    public static function addDependantPackageToConfig($package)
+    {
+        static::savePackageConfig($package);
+    }
+
+    /**
+     * @param string $package ~ ex: lci/stockpile
      * @TODO Review ~ this is called on via a post composer script set up in extra
      *
      */
