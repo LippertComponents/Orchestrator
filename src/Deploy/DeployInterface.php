@@ -2,6 +2,7 @@
 
 namespace LCI\MODX\Orchestrator\Deploy;
 
+use modX;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -9,10 +10,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 interface DeployInterface
 {
     /**
-     * Deploy constructor.
+     * DeployInterface constructor.
      * @param Command $application
+     * @param modX $modx
      */
-    public function __construct(Command $application);
+    public function __construct(Command $application, modX $modx);
 
     /**
      * @param OutputInterface $output

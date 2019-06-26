@@ -2,10 +2,10 @@
 
 namespace LCI\MODX\Orchestrator\Console\Command;
 
+use Exception;
 use LCI\MODX\Console\Command\BaseCommand;
 use LCI\MODX\Orchestrator\Deploy\Deploy;
-use LCI\MODX\Orchestrator\Orchestrator;
-use Symfony\Component\Console\Input\InputArgument;
+use LCI\MODX\Orchestrator\Deploy\DeployInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -40,6 +40,7 @@ class DeployCommand extends BaseCommand
      * @param OutputInterface $output
      * @return int|null|void
      * @throws \LCI\Blend\Exception\MigratorException
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -49,11 +50,15 @@ class DeployCommand extends BaseCommand
 
         if (!empty($custom_class = getenv('LCI_MODX_ORCHESTRATOR_DEPLOY_EXTENDED_CLASS'))) {
             /** @var Deploy $orchestratorDeploy */
-            $orchestratorDeploy = new $custom_class($modx);
+            $orchestratorDeploy = new $custom_class($this, $modx);
+
+            if (!$orchestratorDeploy instanceof DeployInterface) {
+                throw new Exception("The class: ".$custom_class.' does not implement the LCI\MODX\Orchestrator\Deploy\DeployInterface interface');
+            }
 
         } else {
             /** @var Deploy $orchestratorDeploy */
-            $orchestratorDeploy = new Deploy($this);
+            $orchestratorDeploy = new Deploy($this, $modx);
         }
 
         if ($describe) {

@@ -3,6 +3,7 @@
 namespace LCI\MODX\Orchestrator\Deploy;
 
 use LCI\MODX\Orchestrator\Orchestrator;
+use modX;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,13 +15,18 @@ class Deploy implements DeployInterface
     /** @var Command */
     protected $command;
 
+    /** @var modX  */
+    protected $modx;
+
     /**
      * Deploy constructor.
      * @param Command $application
+     * @param modX $modx
      */
-    public function __construct(Command $application)
+    public function __construct(Command $application, modX $modx)
     {
         $this->command = $application;
+        $this->modx = $modx;
     }
 
     /**
