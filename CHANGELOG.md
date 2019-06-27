@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2](https://github.com/LippertComponents/Orchestrator/compare/v1.3.1...v1.3.2) - 2019-06-27
+### Changed
+ - Forgot to version bump LCI\MODX\Orchestrator\Console\Application
+
 ## [1.3.1](https://github.com/LippertComponents/Orchestrator/compare/v1.3.0...v1.3.1) - 2019-06-26
 ### Changed
  - Add $modx as construct param to Deploy and DeployInterface
