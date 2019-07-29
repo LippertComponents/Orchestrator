@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.0](https://github.com/LippertComponents/Orchestrator/compare/v1.3.2...v1.4.0) - 2019-07-24
+## [1.4.0](https://github.com/LippertComponents/Orchestrator/compare/v1.3.2...v1.4.0) - 2019-07-29
 ### Added
  - Deploy command will now require MODX extras as defined in the defined in the `core/config/lci_modx_transport_package.php` file
  - New commands to manage MODX extras
