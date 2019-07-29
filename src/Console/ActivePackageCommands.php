@@ -16,7 +16,9 @@ class ActivePackageCommands implements PackageCommands
         'orchestrator_installed' => [
             'LCI\MODX\Orchestrator\Console\Command\DeployCommand',
             'LCI\MODX\Orchestrator\Console\Command\InstallPackages',
-            'LCI\MODX\Orchestrator\Console\Command\UninstallPackages'
+            'LCI\MODX\Orchestrator\Console\Command\UninstallPackages',
+            'LCI\MODX\Orchestrator\Console\Command\ListMODXPackages',
+            'LCI\MODX\Orchestrator\Console\Command\RequireMODXPackages',
         ],
         'orchestrator_not_installed' => [
             'LCI\MODX\Orchestrator\Console\Command\Package'

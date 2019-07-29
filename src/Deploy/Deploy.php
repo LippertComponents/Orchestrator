@@ -2,6 +2,13 @@
 
 namespace LCI\MODX\Orchestrator\Deploy;
 
+use LCI\Blend\Exception\TransportException;
+use LCI\Blend\Exception\TransportNotFoundException;
+use LCI\Blend\Transport\MODXPackages;
+use LCI\Blend\Transport\MODXPackagesConfig;
+use LCI\MODX\Console\Console;
+use LCI\MODX\Console\Helpers\ConsoleUserInteractionHandler;
+use LCI\MODX\Console\Helpers\UserInteractionHandler;
 use LCI\MODX\Orchestrator\Orchestrator;
 use modX;
 use Symfony\Component\Console\Command\Command;
@@ -35,9 +42,10 @@ class Deploy implements DeployInterface
     public function describe(OutputInterface $output)
     {
         $output->writeln('1. You will be prompted with a question if you would like to clear the MODX cache before running migrations');
-        $output->writeln('2. Run all Blend migrations that are ready for all orchestrator packages');
-        $output->writeln('3. Run all Blend migrations that are ready for your local project');
-        $output->writeln('4. You will be prompted with a question if you would like to clear the MODX cache after the migrations have been completed.');
+        $output->writeln('2. Require/update any MODX Extras as defined in the core/config/lci_modx_transport_package.php');
+        $output->writeln('3. Run all Blend migrations that are ready for all orchestrator packages');
+        $output->writeln('4. Run all Blend migrations that are ready for your local project');
+        $output->writeln('5. You will be prompted with a question if you would like to clear the MODX cache after the migrations have been completed.');
     }
 
     /**
@@ -56,6 +64,9 @@ class Deploy implements DeployInterface
         if ($helper->ask($input, $output, $question)) {
             $output->writeln($this->clearMODXCache($input, $output));
         }
+
+        $output->writeln(PHP_EOL.'### Orchestrator require/update MODX Extras as defined in: core/config/lci_modx_transport_package.php');
+        $this->runRequireUpdateMODXPackages($input, $output);
 
         // run all package migrations
         $output->writeln(PHP_EOL.'### Orchestrator package Blend migrations');
@@ -113,6 +124,37 @@ class Deploy implements DeployInterface
         $greetInput = new ArrayInput($arguments);
 
         return $command->run($greetInput, $output);
+    }
+
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    protected function runRequireUpdateMODXPackages(InputInterface $input, OutputInterface $output)
+    {
+        $packages = MODXPackagesConfig::getPackages();
+
+        $interactionHandler = '';
+        if (isset($this->command->consoleUserInteractionHandler) && $this->command->consoleUserInteractionHandler instanceof UserInteractionHandler) {
+            /** @var ConsoleUserInteractionHandler $interactionHandler */
+            $interactionHandler = $this->command->consoleUserInteractionHandler;
+        } else {
+            $interactionHandler = new ConsoleUserInteractionHandler($input, $output);
+        }
+
+        $modxPackages = new MODXPackages($this->modx, $interactionHandler);
+
+        foreach ($packages as $name => $info) {
+            try {
+                $modxPackages->requirePackage($info['signature'], $info['latest'], $info['provider']);
+
+            }  catch (TransportNotFoundException $exception) {
+                $output->writeln('Error: '.$exception->getMessage());
+
+            } catch (TransportException $exception) {
+                $output->writeln('Error: '.$exception->getMessage());
+            }
+        }
     }
 
     /**
