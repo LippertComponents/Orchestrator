@@ -1,9 +1,4 @@
-Install
-    basic
-    Advanced
-
 # Getting Started
-
 
 ## Requirements
 
@@ -18,19 +13,19 @@ If you have not installed MODX and composer do so now before proceeding.
 
 > The basic step follows the directory structure of a basic install of MODX. All examples will be based on running MODX on a MODXCloud instance.  
 
-1) Open up your command line tool into the MODX core directory like so:  
+1. Open up your command line tool into the MODX core directory like so:  
     ```  
     cd /www/core/  
     ```
-2) Create an empty .env file, this can be used for configurations later on
+2. Create an empty .env file, this can be used for configurations later on  
     ```
     touch .env   
     ```
-3) Run the composer command to install
+3. Run the composer command to install  
     ``` 
     composer require lci/orchestrator
     ```
-4) Now run the installation command
+4. Now run the installation command  
     ```
     php vendor/bin/orchestrator orchestrator:install
     ```
