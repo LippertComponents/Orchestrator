@@ -11,7 +11,7 @@ features like autoload. It also provides better interoperability between package
 a full CI/CD workflow for MODX. As Orchestrator packages can have install and update processes automated with custom 
 migrations. While also allowing to create a more easily testable code base with tools like PHPUnit.
 
-Orchestrator also allows developers to easily extend and create custom (Symfony Console)[https://symfony.com/doc/current/components/console.html] 
+Orchestrator also allows developers to easily extend and create custom [Symfony Console](https://symfony.com/doc/current/components/console.html) 
 commands that will all be accessible form within one tool, Orchestrator. 
 
-Next: (Getting Started)[getting-started/]
+Next: [Getting Started](getting-started/)
