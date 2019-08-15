@@ -55,5 +55,5 @@ php vendor/bin/orchestrator deploy
 
 [Gitify](https://docs.modmore.com/en/Open_Source/Gitify/Installation/index.html) is also a good solution for saving your
 MODX content and elements to files to allow a git workflow. One advantage to Blend Migrations is that it abstracts IDs so
-you can have many developers working on different migration scripts with out having any ID collisions or overwrites. Another
+you can have many developers working on different migration scripts without having any ID collisions or overwrites. Another
 is you can create and share scripts that can be reused for any website. 
