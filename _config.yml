@@ -1,1 +1,7 @@
-theme: jekyll-theme-cayman
+# theme: jekyll-theme-cayman
+# Aux links for the upper right navigation
+aux_links:
+  "Fork me on GitHub":
+    - "//github.com/LippertComponents/Orchestrator"
+
+remote_theme: pmarsceill/just-the-docs
