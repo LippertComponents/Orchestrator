@@ -35,7 +35,7 @@ That's it! Orchestrator is now installed, to verify run the command:
 php vendor/bin/orchestrator
 ```
 And you should see something like this:
-![Orchestrator installed!](/images/successful-installed.png)
+![Orchestrator installed!](https://raw.githubusercontent.com/LippertComponents/Orchestrator/gh-pages/images/successful-installed.png)
 
 
 ## What does Orchestrator install into MODX?
