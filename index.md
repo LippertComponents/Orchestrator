@@ -14,4 +14,4 @@ migrations. While also allowing to create a more easily testable code base with 
 Orchestrator also allows developers to easily extend and create custom [Symfony Console](https://symfony.com/doc/current/components/console.html) 
 commands that will all be accessible form within one tool, Orchestrator. 
 
-Next: [Getting Started](getting-started/){: .btn .btn-green }
+[Getting Started](getting-started/){: .btn .btn-green }
