@@ -1,3 +1,9 @@
+---
+layout: default
+title: Package Development
+nav_order: 4
+has_children: false
+---
 # Package Development
 
 Easily create a package that can be placed on [Packagist](https://packagist.org/) or [Private Packagist](https://packagist.com/).

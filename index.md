@@ -1,3 +1,9 @@
+---
+layout: default
+title: Welcome
+nav_order: 1
+has_children: false
+---
 # What is Orchestrator?
 
 Orchestrator is tool that allows developers to take full advantage of composer for your MODX Revolution development workflow. 

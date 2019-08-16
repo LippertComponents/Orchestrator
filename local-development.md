@@ -1,3 +1,9 @@
+---
+layout: default
+title: Local Development
+nav_order: 3
+has_children: false
+---
 # Local Development
 
 Now you can take advantage of PHP namespaces and auto loading when creating a website in MODX! This will make OOP development 

@@ -1,3 +1,10 @@
+---
+layout: default
+title: Blend Migrations
+nav_order: 5
+has_children: true
+permalink: blend
+---
 # Blend Migrations
 
 [![Build Status](https://scrutinizer-ci.com/g/LippertComponents/Blend/badges/build.png?b=master)](https://scrutinizer-ci.com/g/LippertComponents/Blend/)
