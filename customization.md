@@ -1,3 +1,9 @@
+---
+layout: default
+title: Customizations
+nav_order: 3
+has_children: false
+---
 # Customizations 
 
 Configure all customizations within the core/.env file. Any Orchestrator package can have custom settings defined here.

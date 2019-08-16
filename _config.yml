@@ -5,8 +5,3 @@ aux_links:
     - "//github.com/LippertComponents/Orchestrator"
 
 remote_theme: pmarsceill/just-the-docs
-layout: default
-title: Orchestrator
-nav_order: 2
-has_children: true
-permalink: /blend
