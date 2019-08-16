@@ -46,7 +46,7 @@ then be copied into the assets directory in the public web root.
 Migrations are the way to install all MODX elements like chunks and snippets as well as write any custom code you need to 
 run to install or update your package.
 
-To generate a migration class do the following on your local environment do:
+To generate a migration class do the following on your local environment without requiring a MODX instance do:
 
 ```
 cd /www/core/
@@ -89,7 +89,7 @@ public function up()
         ->setFieldDescription('This is my test chunk, note this is limited to 255 or something')
         ->setFieldCategory('My Site=>Chunks')
         //  file path                                          Media Source name, orchestrator will put it in the correct place
-        ->setAsStatic('my/package/src/elements/chunk/myChunk.tpl', 'orchestrator');
+        ->setAsStatic('my/package/src/elements/chunks/myChunk.tpl', 'orchestrator');
     
     // The blend() method will create a back/down data before saving to allow for easy revert with the revertBlend method
     if ($myChunk->blend(true)) {
@@ -114,10 +114,10 @@ public function down()
     $myChunk->setSeedsDir($this->getSeedsDir());// This is needed to retrieve the down data
     
     if ( $myChunk->revertBlend() ) {
-        $this->blender->out($myChunk->getFieldName().' setting has been reverted to '.$this->getSeedsDir());
+        $this->blender->out($myChunk->getFieldName().' chunk has been reverted to '.$this->getSeedsDir());
     
     } else {
-        $this->blender->outError($myChunk->getFieldName().' setting was not reverted');
+        $this->blender->outError($myChunk->getFieldName().' chunk was not reverted');
     }
 }
 ```

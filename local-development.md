@@ -135,7 +135,7 @@ public function up()
         ->setFieldDescription('This is my local test chunk, note this is limited to 255 or something')
         ->setFieldCategory('My Site=>Chunks')
         //  file path                                          Media Source name, assuming you do not change the default MODX file system media source:
-        ->setAsStatic('core/components/local/elements/chunk/myChunk.tpl', 'filesystem');
+        ->setAsStatic('core/components/local/elements/chunks/myChunk.tpl', 'filesystem');
     
     // The blend() method will create a back/down data before saving to allow for easy revert with the revertBlend method
     if ($myChunk->blend(true)) {
@@ -160,10 +160,10 @@ public function down()
     $myChunk->setSeedsDir($this->getSeedsDir());// This is needed to retrieve the down data
     
     if ( $myChunk->revertBlend() ) {
-        $this->blender->out($myChunk->getFieldName().' setting has been reverted to '.$this->getSeedsDir());
+        $this->blender->out($myChunk->getFieldName().' chunk has been reverted to '.$this->getSeedsDir());
     
     } else {
-        $this->blender->outError($myChunk->getFieldName().' setting was not reverted');
+        $this->blender->outError($myChunk->getFieldName().' chunk was not reverted');
     }
 }
 ```
