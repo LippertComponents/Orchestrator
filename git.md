@@ -6,11 +6,11 @@ and accurately deploy your updates.
 
 ## Suggested git setup
 
-1. Include all MODX files in git. This helps a lot when creating any PHP code as you can use your IDE to help auto complete.
-Note Orchestrator does not update MODX versions, so this is still a manual process or click the button on MODXCloud to update. 
-2. Optionally include all vendor packages in git. This speeds up deployment but make sure you have the same PHP version on all
-servers.
-3. Create an .ignore file, basic example
+1. Include all MODX files in git minus a few config files and cache. This helps a lot when creating any PHP code as you can use your IDE to help auto complete.
+Note Orchestrator does not update MODX versions, so this is still a manual process or via MODXCloud to update. 
+2. Optionally include all `core/vendor` files in git. This speeds up deployment but make sure you have the same PHP version on all
+servers or set your deployment [PHP version](https://getcomposer.org/doc/06-config.md#platform) in `core/composer.json`
+3. Create an .ignore file, basic example below
 4. Now create a branch for every server that you wish to have, for example `dev` for development and `master` for production.
 Another common branch would be `staging` for a middle staging server to show for stakeholder approval before deployment to 
 production.
