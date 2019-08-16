@@ -3,7 +3,7 @@ layout: default
 title: System Settings
 nav_order: 6
 has_children: false
-parent: Blend
+parent: Blend Migrations
 ---
 # System Settings
 

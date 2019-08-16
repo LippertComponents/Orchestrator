@@ -3,7 +3,7 @@ layout: default
 title: Seed Site
 nav_order: 4
 has_children: false
-parent: Blend
+parent: Blend Migrations
 ---
 # Seed site
 

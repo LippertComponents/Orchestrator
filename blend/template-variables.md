@@ -3,7 +3,7 @@ layout: default
 title: Template Variables
 nav_order: 8
 has_children: false
-parent: Blend
+parent: Blend Migrations
 ---
 # Template Variables
 

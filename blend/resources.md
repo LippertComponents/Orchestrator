@@ -3,7 +3,7 @@ layout: default
 title: Resources
 nav_order: 3
 has_children: false
-parent: Blend
+parent: Blend Migrations
 ---
 # Resource Migration & Seeds
 

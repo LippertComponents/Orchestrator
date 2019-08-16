@@ -3,7 +3,7 @@ layout: default
 title: Snippets
 nav_order: 5
 has_children: false
-parent: Blend
+parent: Blend Migrations
 ---
 # Snippets
 

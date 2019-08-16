@@ -3,7 +3,7 @@ layout: default
 title: Plugins
 nav_order: 2
 has_children: false
-parent: Blend
+parent: Blend Migrations
 ---
 # Plugins
 

@@ -3,7 +3,7 @@ layout: default
 title: Chunks
 nav_order: 1
 has_children: false
-parent: Blend
+parent: Blend Migrations
 ---
 # Chunks
 
