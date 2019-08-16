@@ -3,7 +3,6 @@ layout: default
 title: Blend Migrations
 nav_order: 5
 has_children: true
-permalink: blend
 ---
 # Blend Migrations
 
