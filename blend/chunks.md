@@ -1,3 +1,10 @@
+---
+layout: default
+title: Chunks
+nav_order: 1
+has_children: false
+parent: Blend
+---
 # Chunks
 
 Chunk can be created or updated with a migration. 

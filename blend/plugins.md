@@ -1,3 +1,10 @@
+---
+layout: default
+title: Plugins
+nav_order: 2
+has_children: false
+parent: Blend
+---
 # Plugins
 
 Plugin can be created or updated with a migration. 

@@ -1,3 +1,10 @@
+---
+layout: default
+title: Resources
+nav_order: 3
+has_children: false
+parent: Blend
+---
 # Resource Migration & Seeds
 
 Resources can be created or updated with a migration. To use the this feature all resources need an alias and you should 

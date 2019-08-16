@@ -1,3 +1,9 @@
+---
+layout: default
+title: Git Workflow
+nav_order: 6
+has_children: false
+---
 # Git Workflow
 
 Use Orchestrator to go from dev to production for your MODX websites. To add any MODX Elements like Chunks and Templates, 

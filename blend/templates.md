@@ -1,3 +1,10 @@
+---
+layout: default
+title: Templates
+nav_order: 7
+has_children: false
+parent: Blend
+---
 # Template
 
 Template can be created or updated with a migration. 

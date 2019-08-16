@@ -1,6 +1,13 @@
+---
+layout: default
+title: Seed Site
+nav_order: 4
+has_children: false
+parent: Blend
+---
 # Seed site
 
-Blend can create a complete site seed for your website with all Elements, Resources and System Settings. A seed a migration
+Blend can create a complete site seed for your website with all Elements, Resources and System Settings. A seed is a migration
 that can then be ran on another MODX instance to import/create your data.
 
 Create a Migration and seeds for all elements, resources and system settings:

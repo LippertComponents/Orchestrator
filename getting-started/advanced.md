@@ -1,3 +1,10 @@
+---
+layout: default
+title: Advanced Setup
+nav_order: 1
+has_children: false
+parent: Getting Started
+---
 # Advanced Setup
 
 The advanced set up optional and only adds small benefit to the developer by allowing Orchestrator to listen to `composer` 

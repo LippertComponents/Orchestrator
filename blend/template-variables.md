@@ -1,3 +1,10 @@
+---
+layout: default
+title: Template Variables
+nav_order: 8
+has_children: false
+parent: Blend
+---
 # Template Variables
 
 Template Variables can be created or updated with a migration. 

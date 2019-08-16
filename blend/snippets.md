@@ -1,3 +1,10 @@
+---
+layout: default
+title: Snippets
+nav_order: 5
+has_children: false
+parent: Blend
+---
 # Snippets
 
 Snippet can be created or updated with a migration. 

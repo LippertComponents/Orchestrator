@@ -1,3 +1,10 @@
+---
+layout: default
+title: System Settings
+nav_order: 6
+has_children: false
+parent: Blend
+---
 # System Settings
 
 System Settings can be created or updated with a migration. 
