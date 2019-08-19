@@ -30,7 +30,7 @@ for a package it would be `src/`.
 
 ```
 src/Console/ActivePackageCommands.php
-core/components/local/Console/Command/ExampleCommand.php
+src/Console/Command/ExampleCommand.php
 ```
 
 ### ActivePackageCommands Class
