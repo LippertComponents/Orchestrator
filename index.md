@@ -6,9 +6,9 @@ has_children: false
 ---
 # What is Orchestrator?
 
-Orchestrator is tool that allows developers to take full advantage of composer for your MODX Revolution development workflow. 
-Orchestrator includes Blend, you can also create migrations that can be testable deployment scripts. 
-While also allowing to install and require traditional MODX Extras via CLI commands and migrations. 
+Orchestrator is tool that allows developers to take full advantage of composer for your MODX Revolution 2.* development 
+workflow. Orchestrator includes Blend. Blend allows you to create and run migrations. Migrations can be testable deployment 
+scripts. Orchestrator also provides a way to install and require traditional MODX Extras via CLI commands and migrations.
 
 ## What does Orchestrator do for developers and site builders?
 
