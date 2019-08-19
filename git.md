@@ -8,7 +8,9 @@ has_children: false
 
 Use Orchestrator to go from dev to production for your MODX websites. To add any MODX Elements like Chunks and Templates, 
 create these via Blend Migrations that can be saved to your git repo and then simply ran on the remaining servers to quickly 
-and accurately deploy your updates.
+and accurately deploy your updates. 
+
+> Note Orchestrator does not install or update MODX, you will need another tool to do that. 
 
 ## Suggested git setup
 
