@@ -47,6 +47,40 @@ cd /www/core/
 php vendor/bin/orchestrator modx:package fred
 ```
 
+## Require Extras via a migration
+
+In a migration file add the related in you `up` and `down` methods:
+
+```php
+<?php
+use LCI\Blend\Transport\MODXPackagesConfig;
+
+// ...
+
+/**
+ * Run the migrations.
+ *
+ * @return void
+ */
+public function up()
+{
+    MODXPackagesConfig::addPackageConfig('ace-1.8.0-pl', true, 'modx.com');
+    MODXPackagesConfig::addPackageConfig('fred-1.0.0-pl', true, 'modx.com');
+    // list as many as you would like installed
+}
+
+/**
+ * Reverse the migrations.
+ *
+ * @return void
+ */
+public function down()
+{
+    MODXPackagesConfig::removePackageConfig('ace-1.8.0-pl');
+    MODXPackagesConfig::removePackageConfig('fred-1.0.0-pl');
+}
+```
+
 ## Deploy
 
 All extras defined in the Orchestrator transport config file: `core/config/lci_modx_transport_package.php` will be installed
