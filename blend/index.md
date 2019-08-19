@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Blend Migrations
-nav_order: 6
+nav_order: 3
 has_children: true
 ---
 # Blend Migrations
@@ -52,14 +52,5 @@ See the [Local](../local-development.md) or [Package](../package-development.md)
 
 ## Example migrations
 
-- [Chunks](chunks.md)
-- [Plugins](plugins.md)
-- [Resources](resources.md)
-- [Seed Site](seed-site.md)
-- [Snippets](snippets.md)
-- [System Settings](system-settings.md)
-- [Templates](templates.md)
-- [Template Variables](template-variables.md)
-
-For more examples see the Blend repo [tests/database/migrations](https://github.com/LippertComponents/Blend/tree/master/tests/database/migrations) 
+See the table of contents. For more examples see the Blend repo [tests/database/migrations](https://github.com/LippertComponents/Blend/tree/master/tests/database/migrations) 
 directory.
