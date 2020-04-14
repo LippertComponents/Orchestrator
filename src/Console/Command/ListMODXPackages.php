@@ -106,6 +106,6 @@ class ListMODXPackages extends BaseCommand
 
 
         $output->writeln($this->getRunStats());
-		return 1;
+		return 0;
     }
 }
