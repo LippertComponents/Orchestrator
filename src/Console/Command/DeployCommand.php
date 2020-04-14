@@ -70,5 +70,7 @@ class DeployCommand extends BaseCommand
         }
 
         $output->writeln(PHP_EOL.$this->getRunStats());
+
+        return 1;
     }
 }
