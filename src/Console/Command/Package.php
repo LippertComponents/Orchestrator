@@ -31,5 +31,6 @@ class Package extends BaseCommand
         Orchestrator::install();
 
         $output->writeln('### Orchestrator has been installed/updated ###');
+		return 0;
     }
 }

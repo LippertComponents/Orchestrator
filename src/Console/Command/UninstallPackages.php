@@ -53,5 +53,6 @@ class UninstallPackages extends BaseCommand
         }
 
         $output->writeln($this->getRunStats());
+		return 0;
     }
 }
